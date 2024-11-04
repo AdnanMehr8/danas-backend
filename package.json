@@ -1,0 +1,40 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@zeldafan0225/ai_horde": "^5.1.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "command-exists": "^1.2.9",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.14.0",
+    "ipaddr.js": "^2.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mime-types": "^2.1.35",
+    "mongoose": "^8.5.4",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.4",
+    "openai": "^4.56.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
+    "simple-git": "^3.26.0",
+    "stream": "^0.0.3",
+    "write-file-atomic": "^5.0.1",
+    "yaml": "^2.5.0",
+    "yauzl": "^3.1.3"
+  }
+}

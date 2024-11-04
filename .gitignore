@@ -1,0 +1,6 @@
+.env
+
+./scripts/admin.js
+
+# Ignore node_modules
+node_modules/
