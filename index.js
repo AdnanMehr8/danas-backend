@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
 app.use(cors({
   // origin: 'http://localhost:3000', 
-  origin: 'https://danas-frontend.vercel.app/', 
+  origin: 'https://danas-frontend.vercel.app', 
 
   credentials: true, 
 }));
