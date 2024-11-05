@@ -1,77 +1,4 @@
-// const express = require("express");
-// const router = express.Router();
-// const Batch = require("../models/Batch");
 
-// // Create a new dispensing record
-// router.post("/record", async (req, res) => {
-//   console.log("Received data structure:", JSON.stringify(req.body, null, 2));
-//   // const { weighingRecordRaw, weighingRecordCoating } = req.body;
-
-//   // // Validate that at least 10 entries exist (optional)
-//   // if (weighingRecordRaw.length < 10 || weighingRecordCoating.length < 10) {
-//   //   return res.status(400).json({ message: 'Both weighingRecordRaw and weighingRecordCoating must contain at least 10 entries.' });
-//   // }
-//   try {
-//     const batch = new Batch(req.body);
-//     await batch.save();
-//     console.log("Saved data:", batch);
-//     res.status(201).json(batch);
-//     console.log(batch);
-//   } catch (error) {
-//     console.error("Error saving batch:", error.message);
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
-// // Get all batch records
-// router.get("/records", async (req, res) => {
-//   try {
-//     const batches = await Batch.find();
-//     res.json(batches);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// // Get a specific batch record
-// router.get("/record/:id", async (req, res) => {
-//   try {
-//     const batch = await Batch.findById(req.params.id);
-//     if (!batch) return res.status(404).json({ message: "Batch not found" });
-//     res.json(batch);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// // Update a batch record
-// router.patch("/record/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params; // This should capture the ID correctly
-//     console.log("Request ID:", id);
-
-//     const batch = await Batch.findByIdAndUpdate(req.params.id, req.body, {
-//       new: true,
-//     });
-//     if (!batch) return res.status(404).json({ message: "Batch not found" });
-//     res.json(batch);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
-// // Delete a batch record
-// router.delete("/record/:id", async (req, res) => {
-//   try {
-//     const batch = await Batch.findByIdAndDelete(req.params.id);
-//     if (!batch) return res.status(404).json({ message: "Batch not found" });
-//     res.json({ message: "Batch deleted successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// module.exports = router;
 const express = require("express");
 const router = express.Router();
 const BatchInfo = require("../models/BatchInfo");
@@ -79,6 +6,7 @@ const Batch = require("../models/Dispensing");
 const Mixing = require("../models/Mixing"); 
 const Compression = require("../models/Compression");
 const Coating = require("../models/Coating"); 
+const Printing = require("../models/Printing"); 
 
 
 // Create a new batchInfo record
@@ -372,6 +300,68 @@ router.delete("/coating/:id", async (req, res) => {
     const coating = await Coating.findByIdAndDelete(req.params.id);
     if (!coating) return res.status(404).json({ message: "coating record not found" });
     res.json({ message: "coating record deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Create a new printing record
+router.post("/printing", async (req, res) => {
+  console.log("Received data structure:", JSON.stringify(req.body, null, 2));
+  try {
+    const printing = new Printing(req.body);
+    await printing.save();
+    console.log("Saved data:", printing);
+    res.status(201).json(printing);
+  } catch (error) {
+    console.error("Error saving printing:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get all printing records
+router.get("/printings", async (req, res) => {
+  try {
+    const printings = await Printing.find();
+    res.json(printings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a specific printing record
+router.get("/printing/:id", async (req, res) => {
+  try {
+    const printing = await Printing.findById(req.params.id);
+    if (!printing) return res.status(404).json({ message: "Printing not found" });
+    res.json(printing);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a printing record
+router.patch("/printing/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // This should capture the ID correctly
+    console.log("Request ID:", id);
+
+    const printing = await Printing.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!printing) return res.status(404).json({ message: "Printing not found" });
+    res.json(printing);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete a printing record
+router.delete("/printing/:id", async (req, res) => {
+  try {
+    const printing = await Printing.findByIdAndDelete(req.params.id);
+    if (!printing) return res.status(404).json({ message: "Printing not found" });
+    res.json({ message: "Printing deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
