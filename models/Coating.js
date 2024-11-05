@@ -58,20 +58,20 @@ const coatingSchema = new mongoose.Schema({
     signature: String,
   },
   checkboxes: {
-    documents: { type: String, default: "notApplicable" },
-    tabletsCoatingMaterial: { type: String, default: "notApplicable" },
-    remnantOfPreviousProduct: { type: String, default: "notApplicable" },
-    area: { type: String, default: "notApplicable" },
-    coatingMachine: { type: String, default: "notApplicable" },
-    containerOrDrums: { type: String, default: "notApplicable" },
-    scoops: { type: String, default: "notApplicable" },
-    pallets: { type: String, default: "notApplicable" },
+    remnants: {
+      labels: [],
+      values: {}
+    },
+    cleanliness: {
+      labels: [],
+      values: {}
+    }
   },
   tempAndHumidity: {
     temperature: String,
     humidity: String,
+    coatingRemarks: String,
   },
-  coatingRemarks: String,
   authorization: {
     authorizedForUse: String,
     dateAndTime: String,

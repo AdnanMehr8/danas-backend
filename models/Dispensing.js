@@ -56,23 +56,21 @@ const BatchSchema = new mongoose.Schema({
       signature: String,
     },
     checkboxes: {
-      cartons: { type: String, default: 'notApplicable' },
-      documents: { type: String, default: 'notApplicable' },
-      rawMaterial: { type: String, default: 'notApplicable' },
-      remnantOfPreviousProduct: { type: String, default: 'notApplicable' },
-      area: { type: String, default: 'notApplicable' },
-      weighingBalance: { type: String, default: 'notApplicable' },
-      dispensingBoard: { type: String, default: 'notApplicable' },
-      scoops: { type: String, default: 'notApplicable' },
-      pallets: { type: String, default: 'notApplicable' },
-      machineUsed: String,
+      remnants: {
+        labels: [],
+        values: {}
+      },
+      cleanliness: {
+        labels: [],
+        values: {}
+      }
     },
     tempAndHumidity: {
       temperature: String,
       humidity: String,
       machineUsed: String,
+      remarks: String,
     },
-    remarks: String,
     authorization: {
       authorizedForUse: String,
       dateAndTime: String,
