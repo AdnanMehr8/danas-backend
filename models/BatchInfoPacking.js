@@ -1,6 +1,6 @@
 const mongoose = require('../config/dbConfig');
 
-const batchInfoSchema = new mongoose.Schema({
+const batchInfoPackingSchema = new mongoose.Schema({
   batch: {
     productName: String,
     batchNo: String,
@@ -12,7 +12,8 @@ const batchInfoSchema = new mongoose.Schema({
     mfgLicense: String,
     productRegNo: String,
     validFrom: String,
+    mrpRs: String,
   },
 });
 
-module.exports = mongoose.model('BatchInfo', batchInfoSchema);
+module.exports = mongoose.model('BatchInfoPacking', batchInfoPackingSchema);

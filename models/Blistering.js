@@ -12,11 +12,9 @@ const batchQRecordSchema = new mongoose.Schema({
     totalRejection: String,
     packingStoreSupervisor: String,
     packingSupervisor: String,
-    packingStoreSupervisorDate: String,
-    packingSupervisorDate: String,
 });
 
-const Printing = new mongoose.Schema({
+const Blistering = new mongoose.Schema({
     batchRecord: {
         department: String,
         currentProduct: String,
@@ -63,7 +61,7 @@ const Printing = new mongoose.Schema({
       dateCARB: String,
 
     },
-    tailLineClearancePrinting: {
+    tailLineClearanceBlistering: {
         lineProduct: String,
         lineProductBatchNo: String,
         mfg: String,
@@ -77,7 +75,7 @@ const Printing = new mongoose.Schema({
         pDate: String,
         qaDate: String
       },
-      tailLineClearancePrinting2: {
+      tailLineClearanceBlistering2: {
         lineProduct: String,
         lineProductBatchNo: String,
         mfg: String,
@@ -92,26 +90,28 @@ const Printing = new mongoose.Schema({
         qaDate: String
     },
     instructions: {
-        codingOperator: String,
-        codingChecker: String,
-        productionOfficer: String,
+        blisterOperator: String,
+        helper: String,
+        productionPharmacist: String
     },
     checkSheet: {
         labels: [
           {
             dateAndTime: String,
-            ucOrLabel: String,
-            commPackeOrExport: String,
-            batchNo: String,
-            mfgDate: String,
-            expDate: String,
-            mrp: String,
-            checkedBy: String,
+            sealingTemp: String,
+            appearance: String,
+            embossing: String,
+            tabsOrCapsPerBlister: String,
+            text: String,
+            sealing: String,
+            leakTest: String,
+            performedByProductionQA: String,
           },
         ],
-        dateStarted: String,
-        dateCompleted: String,
+        blisterMachineId: String,
+        productionPharmacist: String,
+        productionPharmacistDate: String,
       },
   }, { timestamps: true });
   
-  module.exports = mongoose.model('Printing', Printing);
+  module.exports = mongoose.model('Blistering', Blistering);

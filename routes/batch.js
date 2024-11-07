@@ -7,6 +7,9 @@ const Mixing = require("../models/Mixing");
 const Compression = require("../models/Compression");
 const Coating = require("../models/Coating"); 
 const Printing = require("../models/Printing"); 
+const Blistering = require("../models/Blistering");
+const Packing = require("../models/Packing");
+const BatchInfoPacking = require("../models/BatchInfoPacking");
 
 
 // Create a new batchInfo record
@@ -64,6 +67,68 @@ router.patch("/batch-info/:id", async (req, res) => {
 router.delete("/batch-info/:id", async (req, res) => {
   try {
     const batchInfo = await BatchInfo.findByIdAndDelete(req.params.id);
+    if (!batchInfo) return res.status(404).json({ message: "BatchInfo not found" });
+    res.json({ message: "BatchInfo deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Create a new batchInfoPAcing record
+router.post("/batch-info-packing", async (req, res) => {
+  console.log("Received data structure:", JSON.stringify(req.body, null, 2));
+  try {
+    const batchInfo = new BatchInfoPacking(req.body);
+    await batchInfo.save();
+    console.log("Saved data:", batchInfo);
+    res.status(201).json(batchInfo);
+  } catch (error) {
+    console.error("Error saving batchInfo:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get all batchInfo records
+router.get("/batches-info", async (req, res) => {
+  try {
+    const batchInfoes = await BatchInfoPacking.find();
+    res.json(batchInfoes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a specific batchInfo record
+router.get("/batch-info-packing/:id", async (req, res) => {
+  try {
+    const batchInfo = await BatchInfoPacking.findById(req.params.id);
+    if (!batchInfo) return res.status(404).json({ message: "BatchInfoPacking not found" });
+    res.json(batchInfo);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a batchInfo record
+router.patch("/batch-info-packing/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // This should capture the ID correctly
+    console.log("Request ID:", id);
+
+    const batchInfo = await BatchInfoPacking.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!batchInfo) return res.status(404).json({ message: "BatchInfoPacking not found" });
+    res.json(batchInfo);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete a batchInfo record
+router.delete("/batch-info-packing/:id", async (req, res) => {
+  try {
+    const batchInfo = await BatchInfoPacking.findByIdAndDelete(req.params.id);
     if (!batchInfo) return res.status(404).json({ message: "BatchInfo not found" });
     res.json({ message: "BatchInfo deleted successfully" });
   } catch (error) {
@@ -362,6 +427,130 @@ router.delete("/printing/:id", async (req, res) => {
     const printing = await Printing.findByIdAndDelete(req.params.id);
     if (!printing) return res.status(404).json({ message: "Printing not found" });
     res.json({ message: "Printing deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Create a new blistering record
+router.post("/blistering", async (req, res) => {
+  console.log("Received data structure:", JSON.stringify(req.body, null, 2));
+  try {
+    const blistering = new Blistering(req.body);
+    await blistering.save();
+    console.log("Saved data:", blistering);
+    res.status(201).json(blistering);
+  } catch (error) {
+    console.error("Error saving blistering:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get all blistering records
+router.get("/blisterings", async (req, res) => {
+  try {
+    const blisterings = await Blistering.find();
+    res.json(blisterings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a specific blistering record
+router.get("/blistering/:id", async (req, res) => {
+  try {
+    const blistering = await Blistering.findById(req.params.id);
+    if (!blistering) return res.status(404).json({ message: "Blistering not found" });
+    res.json(blistering);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a blistering record
+router.patch("/blistering/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // This should capture the ID correctly
+    console.log("Request ID:", id);
+
+    const blistering = await Blistering.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!blistering) return res.status(404).json({ message: "Blistering not found" });
+    res.json(blistering);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete a blistering record
+router.delete("/blistering/:id", async (req, res) => {
+  try {
+    const blistering = await Blistering.findByIdAndDelete(req.params.id);
+    if (!blistering) return res.status(404).json({ message: "Blistering not found" });
+    res.json({ message: "Blistering deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Create a new packing record
+router.post("/packing", async (req, res) => {
+  console.log("Received data structure:", JSON.stringify(req.body, null, 2));
+  try {
+    const packing = new Packing(req.body);
+    await packing.save();
+    console.log("Saved data:", packing);
+    res.status(201).json(packing);
+  } catch (error) {
+    console.error("Error saving packing:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get all packing records
+router.get("/packings", async (req, res) => {
+  try {
+    const packings = await Packing.find();
+    res.json(packings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a specific packing record
+router.get("/packing/:id", async (req, res) => {
+  try {
+    const packing = await Packing.findById(req.params.id);
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json(packing);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a packing record
+router.patch("/packing/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // This should capture the ID correctly
+    console.log("Request ID:", id);
+
+    const packing = await Packing.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json(packing);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete a packing record
+router.delete("/packing/:id", async (req, res) => {
+  try {
+    const packing = await Packing.findByIdAndDelete(req.params.id);
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json({ message: "Packing deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

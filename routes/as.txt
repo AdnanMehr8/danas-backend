@@ -1,0 +1,61 @@
+// Create a new packing record
+router.post("/packing", async (req, res) => {
+  console.log("Received data structure:", JSON.stringify(req.body, null, 2));
+  try {
+    const packing = new Packing(req.body);
+    await packing.save();
+    console.log("Saved data:", packing);
+    res.status(201).json(packing);
+  } catch (error) {
+    console.error("Error saving packing:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get all packing records
+router.get("/packings", async (req, res) => {
+  try {
+    const packings = await Packing.find();
+    res.json(packings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a specific packing record
+router.get("/packing/:id", async (req, res) => {
+  try {
+    const packing = await Packing.findById(req.params.id);
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json(packing);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a packing record
+router.patch("/packing/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // This should capture the ID correctly
+    console.log("Request ID:", id);
+
+    const packing = await Packing.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json(packing);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Delete a packing record
+router.delete("/packing/:id", async (req, res) => {
+  try {
+    const packing = await Packing.findByIdAndDelete(req.params.id);
+    if (!packing) return res.status(404).json({ message: "Packing not found" });
+    res.json({ message: "Packing deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
