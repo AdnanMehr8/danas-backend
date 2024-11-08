@@ -159,7 +159,7 @@ const Packing = new mongoose.Schema({
         qaObservations: [
           {
             parameter: String,
-            statusMixing: String, // OK or Not OK
+            statusPacking: String, // OK or Not OK
             remarks: String,
           },
         ],
