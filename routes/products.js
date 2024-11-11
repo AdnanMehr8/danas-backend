@@ -122,16 +122,26 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE product entry
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const product = await Product.findById(req.params.id);
+//     if (!product) return res.status(404).json({ message: 'Product not found' });
+
+//     await product.remove();
+//     res.json({ message: 'Product removed' });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 router.delete('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ message: 'Product not found' });
-
-    await product.remove();
+    
+    await Product.findByIdAndDelete(req.params.id);
     res.json({ message: 'Product removed' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
 module.exports = router;
