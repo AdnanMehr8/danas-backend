@@ -7,6 +7,7 @@ const usersRoute = require('./routes/users');
 const batchRoute = require('./routes/batch');
 const machineRoute = require('./routes/machines');
 const productRoute = require('./routes/products');
+const categoriesRoute = require('./routes/categories');
 const createAdminAccount = require('./scripts/admin');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -45,6 +46,7 @@ app.use('/api', usersRoute);
 app.use('/api', batchRoute);
 app.use('/api/equipment', machineRoute);
 app.use('/api/products', productRoute);
+app.use('/api/categories', categoriesRoute);
 // app.use('/api/dispensing', require('./routes/dispensing'));
 // app.use('/api/mixing', require('./routes/mixing'));
 // app.use('/api/compression', require('./routes/compression'));
@@ -62,6 +64,13 @@ app.get('/auth/check', (req, res) => {
   }
 });
 
+// Handle unhandled routes
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can't find ${req.originalUrl} on this server!`
+  });
+});
 
 createAdminAccount();
 
