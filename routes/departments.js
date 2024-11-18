@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const Department = require('../models/Departments');
+const authMiddleware = require('../utils/authMiddleware');
+const checkPermission = require('../utils/checkMiddleware');
+
 
 // Get all departments
-router.get('/departments', async (req, res) => {
+router.get('/departments',
+    authMiddleware.auth, 
+    checkPermission('departments', 'read'),
+    async (req, res) => {
     try {
         const departments = await Department.find();
         res.json(departments);
@@ -13,7 +19,10 @@ router.get('/departments', async (req, res) => {
 });
 
 // Create a new department
-router.post('/departments', async (req, res) => {
+router.post('/departments',
+    authMiddleware.auth, 
+    checkPermission('departments', 'create'),
+    async (req, res) => {
     try {
         const newDepartment = new Department({
             departmentList: [{
@@ -29,7 +38,10 @@ router.post('/departments', async (req, res) => {
 });
 
 // Update a department
-router.put('/departments/:id', async (req, res) => {
+router.put('/departments/:id',
+    authMiddleware.auth, 
+    checkPermission('departments', 'update'),
+    async (req, res) => {
     try {
         const department = await Department.findById(req.params.id);
         if (!department) {
@@ -48,7 +60,10 @@ router.put('/departments/:id', async (req, res) => {
 
 // Delete a department
 // Delete a department
-router.delete('/departments/:id', async (req, res) => {
+router.delete('/departments/:id',
+    authMiddleware.auth, 
+    checkPermission('departments', 'delete'),
+    async (req, res) => {
     try {
         const department = await Department.findByIdAndDelete(req.params.id);
         if (!department) {

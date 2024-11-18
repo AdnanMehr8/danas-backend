@@ -49,6 +49,7 @@ class JWTService {
                 { token },
                 { upsert: true, new: true }
             );
+            console.log('Refresh token updated successfully for user:', userId);
         } catch (error) {
             console.error('Error storing refresh token:', error);
             throw new Error('Error storing refresh token');

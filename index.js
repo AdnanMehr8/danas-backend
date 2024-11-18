@@ -11,9 +11,13 @@ const categoriesRoute = require('./routes/categories');
 const processesRoute = require('./routes/processes');
 const batchPlanRoute = require('./routes/batchPlan');
 const departmentsRoute = require('./routes/departments');
+const permissionsRoute = require('./routes/permissions');
+const rolesRoute = require('./routes/roles');
 const createAdminAccount = require('./scripts/admin');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { initializeRolesAndPermissions } = require('./utils/checkMiddleware');
+
 
 
 const app = express();
@@ -52,6 +56,8 @@ app.use('/api', departmentsRoute);
 app.use('/api/products', productRoute);
 app.use('/api/categories', categoriesRoute);
 app.use('/api/processes', processesRoute);
+app.use('/api/permissions', permissionsRoute);
+app.use('/api/roles', rolesRoute);
 app.use('/api', batchPlanRoute);
 // app.use('/api/dispensing', require('./routes/dispensing'));
 // app.use('/api/mixing', require('./routes/mixing'));
@@ -79,7 +85,8 @@ app.all('*', (req, res, next) => {
 });
 
 createAdminAccount();
-
+// In your backend startup code
+//  initializeRolesAndPermissions();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

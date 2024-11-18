@@ -37,7 +37,7 @@ const auth = async (req, res, next) => {
         const { refreshToken, accessToken } = req.cookies;
 
         if (!refreshToken || !accessToken) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: 'no token' });
         }
 
         let userId;
@@ -51,6 +51,12 @@ const auth = async (req, res, next) => {
         let user;
         try {
             user = await User.findById(userId);
+            // .populate({
+            //     path: 'role',
+            //     populate: {
+            //       path: 'permissions'
+            //     }
+            //   });
         } catch (error) {
             return next(error);
         }
@@ -96,5 +102,8 @@ const qa_officer = (req, res, next) => {
     }
     next();
 };
+
+
+
 
 module.exports = { auth, admin, operator, pharmacist, qa_officer };

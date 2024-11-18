@@ -24,45 +24,6 @@ router.get('/:id', async (req, res) => {
 });
 
 // // POST new product
-// // POST new product
-// router.post('/', async (req, res) => {
-//   try {
-//     const { categoryId, productList } = req.body;
-
-//     // Check if the categoryId is for Tablets (e.g., categoryId == "2" for tablets)
-//     if (categoryId === "2") {  // Assuming "2" is the categoryId for Tablets
-//       const validatedProductList = productList.map((product) => {
-//         // Set subCategory based on description (e.g., if "Coated" is in the description, set it to "Coated")
-//         const subCategory = product.description.includes("Non-Coated") ? "Non-Coated" : "Coated";
-
-//         return {
-//           ...product,
-//           subCategory
-//         };
-//       });
-
-//       const newProduct = new Product({
-//         categoryId,
-//         productList: validatedProductList
-//       });
-
-//       const savedProduct = await newProduct.save();
-//       res.status(201).json(savedProduct);
-//     } else {
-//       // For non-tablet categories, do not modify subCategory
-//       const newProduct = new Product({
-//         categoryId,
-//         productList
-//       });
-
-//       const savedProduct = await newProduct.save();
-//       res.status(201).json(savedProduct);
-//     }
-//   } catch (err) {
-//     console.error('Error saving product:', err);
-//     res.status(400).json({ message: err.message });
-//   }
-// });
 router.post('/', async (req, res) => {
   try {
     const { categoryId, productList } = req.body;

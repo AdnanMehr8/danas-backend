@@ -12,6 +12,7 @@ const batchInfoSchema = new mongoose.Schema({
     mfgLicense: String,
     productRegNo: String,
     validFrom: String,
+    subCategory: String
   },
 });
 
