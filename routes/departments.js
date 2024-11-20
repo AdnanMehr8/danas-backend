@@ -7,8 +7,8 @@ const checkPermission = require('../utils/checkMiddleware');
 
 // Get all departments
 router.get('/departments',
-    authMiddleware.auth, 
-    checkPermission('departments', 'read'),
+    // authMiddleware.auth, 
+    // checkPermission('departments', 'read'),
     async (req, res) => {
     try {
         const departments = await Department.find();
@@ -20,8 +20,8 @@ router.get('/departments',
 
 // Create a new department
 router.post('/departments',
-    authMiddleware.auth, 
-    checkPermission('departments', 'create'),
+    // authMiddleware.auth, 
+    // checkPermission('departments', 'create'),
     async (req, res) => {
     try {
         const newDepartment = new Department({
@@ -39,8 +39,8 @@ router.post('/departments',
 
 // Update a department
 router.put('/departments/:id',
-    authMiddleware.auth, 
-    checkPermission('departments', 'update'),
+    // authMiddleware.auth, 
+    // checkPermission('departments', 'update'),
     async (req, res) => {
     try {
         const department = await Department.findById(req.params.id);
@@ -61,8 +61,8 @@ router.put('/departments/:id',
 // Delete a department
 // Delete a department
 router.delete('/departments/:id',
-    authMiddleware.auth, 
-    checkPermission('departments', 'delete'),
+    // authMiddleware.auth, 
+    // checkPermission('departments', 'delete'),
     async (req, res) => {
     try {
         const department = await Department.findByIdAndDelete(req.params.id);
