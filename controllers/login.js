@@ -18,14 +18,14 @@ async function login(req, res) {
             maxAge: 1000 * 60 * 30, // 30 minutes
             httpOnly: true,
             sameSite: 'lax',
-            secure: false
+            secure: true
         });
 
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
             httpOnly: true,
             sameSite: 'lax',
-            secure: false
+            secure: true
         });
         console.log('User: ', user)
         res.json({auth: true, message: 'Login Successfully', user });

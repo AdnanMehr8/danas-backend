@@ -16,14 +16,14 @@ async function refresh(req, res, next) {
             maxAge: 1000 * 60 * 30, // 30 minutes
             httpOnly: true,
             sameSite: 'lax',
-            secure: false
+            secure: true
         });
 
         res.cookie('refreshToken', newRefreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
             httpOnly: true,
             sameSite: 'lax',
-            secure: false
+            secure: true
         });
 
         const user = await User.findById(userId);
