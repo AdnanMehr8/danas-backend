@@ -15,14 +15,14 @@ async function refresh(req, res, next) {
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 30, // 30 minutes
             httpOnly: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             secure: true
         });
 
         res.cookie('refreshToken', newRefreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
             httpOnly: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             secure: true
         });
 
