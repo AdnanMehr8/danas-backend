@@ -13,6 +13,7 @@ const batchInfoPackingSchema = new mongoose.Schema({
     productRegNo: String,
     validFrom: String,
     mrpRs: String,
+    subCategory: String
   },
 });
 

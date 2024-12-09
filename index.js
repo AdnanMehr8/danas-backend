@@ -17,7 +17,7 @@ const createAdminAccount = require('./scripts/admin');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { initializeRolesAndPermissions } = require('./utils/checkMiddleware');
-
+const batchIdRoutes = require("./routes/batchId");
 
 
 const app = express();
@@ -59,6 +59,8 @@ app.use('/api/processes', processesRoute);
 app.use('/api/permissions', permissionsRoute);
 app.use('/api/roles', rolesRoute);
 app.use('/api', batchPlanRoute);
+app.use("/api/batch-id", batchIdRoutes);
+
 // app.use('/api/dispensing', require('./routes/dispensing'));
 // app.use('/api/mixing', require('./routes/mixing'));
 // app.use('/api/compression', require('./routes/compression'));

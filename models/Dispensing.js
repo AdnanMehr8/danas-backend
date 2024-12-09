@@ -32,18 +32,18 @@ const CheckRecordCoatingSchema = new mongoose.Schema({
     receivedBySupervisor: String
   });
 const BatchSchema = new mongoose.Schema({
-    // batchInfo: {
-    //   productName: String,
-    //   batchNo: String,
-    //   batchSize: String,
-    //   noOfPacks: String,
-    //   noOfTablets: String,
-    //   packsSize: String,
-    //   expiryDate: String,
-    //   mfgLicense: String,
-    //   productRegNo: String,
-    //   validFrom: String,
-    // },
+    batchInfo: {
+      productName: String,
+      batchNo: String,
+      batchSize: String,
+      noOfPacks: String,
+      noOfTablets: String,
+      packsSize: String,
+      expiryDate: String,
+      mfgLicense: String,
+      productRegNo: String,
+      validFrom: String,
+    },
     batchRecord: {
       department: String,
       currentProduct: String,

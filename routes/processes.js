@@ -53,6 +53,7 @@ const router = express.Router();
 const processController = require('../controllers/processes');
 router.get('/', processController.getProcesses);
 router.put('/', processController.updateProcessOrder);
+router.put('/:id', processController.updateProcess);
 // router.post('/', processController.addProcesses);
 router.post('/', processController.addSingleProcess);
 router.delete('/:id', processController.deleteProcess);

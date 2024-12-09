@@ -35,7 +35,8 @@ const UserDTO = require('../Dto/userDto');
 const auth = async (req, res, next) => {
     try {
         const { refreshToken, accessToken } = req.cookies;
-
+        console.log('RefreshToken: ', refreshToken);
+        console.log('AccessToken: ', accessToken);
         if (!refreshToken || !accessToken) {
             return res.status(401).json({ message: 'no token' });
         }

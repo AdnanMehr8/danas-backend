@@ -114,3 +114,38 @@ exports.updateProcessOrder = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// PUT: Update a process by ID (excluding order field)
+exports.updateProcess = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    // Remove order field if it's included in the update data
+    if (updateData.order !== undefined) {
+      delete updateData.order;
+    }
+
+    // Find and update the process, but don't allow order updates
+    const updatedProcess = await Process.findByIdAndUpdate(
+      id,
+      updateData,
+      { 
+        new: true, // Return the updated document
+        runValidators: true // Run model validations
+      }
+    );
+
+    if (!updatedProcess) {
+      return res.status(404).json({ message: 'Process not found.' });
+    }
+
+    res.json(updatedProcess);
+  } catch (error) {
+    // Handle specific MongoDB validation errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: error.message });
+    }
+    res.status(500).json({ message: error.message });
+  }
+};

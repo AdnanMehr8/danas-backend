@@ -17,6 +17,43 @@ const batchQRecordSchema = new mongoose.Schema({
 });
 
 const Printing = new mongoose.Schema({
+  pHeader: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+    mrpRs: String,
+    subCategory: String
+  },
+  docCheckList: {
+    status: [
+      {
+        parameter: String,
+        statusDocs: String,
+      }
+    ],
+    checkedByDoc: String,
+    checkedbyPPO: String,
+    checkedByQA: String,
+  },
+  batchInfo: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+  },
     batchRecord: {
         department: String,
         currentProduct: String,

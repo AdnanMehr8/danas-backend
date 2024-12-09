@@ -15,6 +15,32 @@ const batchQRecordSchema = new mongoose.Schema({
 });
 
 const Packing = new mongoose.Schema({
+  pHeader: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+    mrpRs: String,
+    subCategory: String
+  },
+  batchInfo: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+  },
     batchRecord: {
         department: String,
         currentProduct: String,
@@ -165,6 +191,37 @@ const Packing = new mongoose.Schema({
         ],
         qaOfficer: String,
         qaManager: String,
+      },
+      qcHeader: {
+        docNo: String,
+        effectiveDate: String,
+        revisionNo: String,
+        replaces: String
+    },
+      batch: {
+        productName: String,
+        batchNo: String,
+        qCNo: String,
+        batchSize: String,
+        packsSize: String,
+        mfgDate: String,
+        expiryDate: String,
+        analysisDate: String,
+        sampleType: String,
+      },
+      testAndResults: {
+        parameters: [
+          {
+            parameters: String,
+            specification: String,
+            results: String,
+          },
+        ],
+        checkedByQCA: String,
+        checkedByQCADate: String,
+        checkedByQCM: String,
+        checkedByQCMDate: String,
+        remarks: String
       },
       reconcilliationSheet: {
         labels: [

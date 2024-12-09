@@ -1,13 +1,7 @@
 const mongoose = require("../config/dbConfig");
 
 const manufacturingRecordSchema = new mongoose.Schema({
-  sievingStartedAt: String,
-  sievingCompletedOn: String,
-  meltingStartedAt: String,
-  meltingCompletedOn: String,
-  mixingStartedAt: String,
-  mixingCompletedOn: String,
-  sampleTakenQty: String,
+  actual: String,
   performedByOperator: String,
   pboDate: String,
   checkedByPO: String,
@@ -40,15 +34,18 @@ const mixingSchema = new mongoose.Schema({
     verifiedBy: String,
     vDate: String,
   }],
-  // batchInfo: {
-  //   productName: String,
-  //   batchNo: String,
-  //   batchSize: String,
-  //   noOfPacks: String,
-  //   noOfTablets: String,
-  //   packsSize: String,
-  //   expiryDate: String,
-  // },
+  batchInfo: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+  },
   batchRecord: {
     department: String,
     currentProduct: String,
@@ -145,6 +142,37 @@ const mixingSchema = new mongoose.Schema({
     qaManager: String,
   },
   machineUsed: String,
-});
+  qcHeader: {
+    docNo: String,
+    effectiveDate: String,
+    revisionNo: String,
+    replaces: String
+},
+  batch: {
+    productName: String,
+    batchNo: String,
+    qCNo: String,
+    batchSize: String,
+    packsSize: String,
+    mfgDate: String,
+    expiryDate: String,
+    analysisDate: String,
+    sampleType: String,
+  },
+  testAndResults: {
+    parameters: [
+      {
+        parameters: String,
+        specification: String,
+        results: String,
+      },
+    ],
+    checkedByQCA: String,
+    checkedByQCADate: String,
+    checkedByQCM: String,
+    checkedByQCMDate: String,
+    qcRemarks: String,
+  },
+}, { timestamps: true });
 
 module.exports = mongoose.model("Mixing", mixingSchema);

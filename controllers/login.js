@@ -8,7 +8,7 @@ async function login(req, res) {
         const user = await authService.login(email, password);
 
         const accessToken = JWTService.signAccessToken({ _id: user._id }, '30m');
-        const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '60m');
+        const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '7d');
 
         // Update or create refresh token in DB
         await JWTService.storeRefreshToken(refreshToken, user._id);

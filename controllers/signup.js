@@ -6,7 +6,7 @@ async function createUser(req, res) {
         const userData = req.body;
         const user = await userService.createUser(userData);
         const accessToken = JWTService.signAccessToken({ _id: user._id }, '30m');
-        const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '60m');
+        const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '7d');
 
         // Store refresh token in DB
         await JWTService.storeRefreshToken(refreshToken, user._id);

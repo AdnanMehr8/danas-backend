@@ -1,17 +1,14 @@
 const mongoose = require('../config/dbConfig');
 
 const coatingRecordSchema = new mongoose.Schema({
-  temp: String,
-  rH: String,
-  weightOfGranules: String,
-  upperPunch: String,
-  lowerPunch: String,
-  compressionStartedAt: String,
-  completedOn: String,
-  sampleTakenQty: String,
+  activityCompliance: String,
   performedByOperator: String,
+  pboDate: String,
   checkedByPO: String,
+  checkedByPODate: String,
   checkedByQAI: String,
+  checkedByQAIDate: String,
+  target: String,
 });
 
 const coatingSchema = new mongoose.Schema({
@@ -37,15 +34,18 @@ const coatingSchema = new mongoose.Schema({
     verifiedBy: String,
     vDate: String,
   }],
-  // batchInfo: {
-  //   productName: String,
-  //   batchNo: String,
-  //   batchSize: String,
-  //   noOfPacks: String,
-  //   noOfTablets: String,
-  //   packsSize: String,
-  //   expiryDate: String,
-  // },
+  batchInfo: {
+    productName: String,
+    batchNo: String,
+    batchSize: String,
+    noOfPacks: String,
+    noOfTablets: String,
+    packsSize: String,
+    expiryDate: String,
+    mfgLicense: String,
+    productRegNo: String,
+    validFrom: String,
+  },
   batchRecord: {
     department: String,
     currentProduct: String,
@@ -79,24 +79,22 @@ const coatingSchema = new mongoose.Schema({
   coatingSolutionPreparation: [{
     instructions: String,
     activityCompliance: String,
-    sampleTakenQty: String,
     performedByOperator: String,
     pboDate: String,
-    checkedByPODate: String,
-    checkedByQAIDate: String,
     checkedByPO: String,
+    checkedByPODate: String,
     checkedByQAI: String,
+    checkedByQAIDate: String,
   }],
   coatingProcedure:
     [{
       instructions: String,
       activityCompliance: String,
-      sampleTakenQty: String,
       performedByOperator: String,
-      checkedByPO: String,
-      checkedByQAI: String,
       pboDate: String,
+      checkedByPO: String,
       checkedByPODate: String,
+      checkedByQAI: String,
       checkedByQAIDate: String,
     }],
 
@@ -202,7 +200,37 @@ const coatingSchema = new mongoose.Schema({
 
   },
   machineUsed: String,
-
-});
+  qcHeader: {
+    docNo: String,
+    effectiveDate: String,
+    revisionNo: String,
+    replaces: String
+},
+  batch: {
+    productName: String,
+    batchNo: String,
+    qCNo: String,
+    batchSize: String,
+    packsSize: String,
+    mfgDate: String,
+    expiryDate: String,
+    analysisDate: String,
+    sampleType: String,
+  },
+  testAndResults: {
+    parameters: [
+      {
+        parameters: String,
+        specification: String,
+        results: String,
+      },
+    ],
+    checkedByQCA: String,
+    checkedByQCADate: String,
+    checkedByQCM: String,
+    checkedByQCMDate: String,
+    remarks: String
+  },
+}, { timestamps: true });
 
 module.exports = mongoose.model('Coating', coatingSchema);
