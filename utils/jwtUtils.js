@@ -1,18 +1,18 @@
-// const jwt = require('jsonwebtoken');
-// const { secretKey } = require('../config/jwtConfig');
+// // const jwt = require('jsonwebtoken');
+// // const { secretKey } = require('../config/jwtConfig');
 
-// function generateToken (user) {
-//     const payload = {
-//         id: user._id,
-//         email: user.email,
-//         role: user.role
-//     }
-//     return jwt.sign(payload, secretKey, { expiresIn: '1m' });
-// };
+// // function generateToken (user) {
+// //     const payload = {
+// //         id: user._id,
+// //         email: user.email,
+// //         role: user.role
+// //     }
+// //     return jwt.sign(payload, secretKey, { expiresIn: '1m' });
+// // };
 
-// module.exports = {
-//     generateToken
-// };
+// // module.exports = {
+// //     generateToken
+// // };
 const jwt = require('jsonwebtoken');
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = require('../config/jwtConfig');
 const RefreshToken = require('../models/Token');

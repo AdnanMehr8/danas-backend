@@ -20,6 +20,7 @@ const coatingSchema = new mongoose.Schema({
     specificArea: String,
     sectionInCharge: String,
     precautionsRead: String,
+    precautionsReadDate: String,
   },
   lineClearance: [{
     equipment: String,
