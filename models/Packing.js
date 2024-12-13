@@ -50,7 +50,8 @@ const Packing = new mongoose.Schema({
         date: String,
         previousProduct: String,
         previousProductBatchNo: String,
-        signature: String,
+      signature: String,
+      lineNo: String
       },
     checkboxes: {
       remnants: {

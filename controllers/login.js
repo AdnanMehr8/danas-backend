@@ -7,7 +7,7 @@ async function login(req, res) {
         const { email, password } = req.body;
         const user = await authService.login(email, password);
 
-        const accessToken = JWTService.signAccessToken({ _id: user._id }, '30m');
+        const accessToken = JWTService.signAccessToken({ _id: user._id }, '24h');
         const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '7d');
 
         // Update or create refresh token in DB
@@ -15,7 +15,8 @@ async function login(req, res) {
 
         // Send tokens in cookies
         res.cookie('accessToken', accessToken, {
-            maxAge: 1000 * 60 * 30, // 30 minutes
+            // maxAge: 1000 * 60 * 30, // 30 minutes
+            maxAge: 1000 * 60 * 60 * 24, // 24 hours
             httpOnly: true,
             sameSite: 'none',
             secure: true

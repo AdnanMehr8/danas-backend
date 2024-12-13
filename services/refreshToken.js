@@ -21,7 +21,7 @@ async function refresh(refreshToken) {
         }
 
         // Generate new tokens
-        const newAccessToken = JWTService.signAccessToken({ _id: userId }, '30m');
+        const newAccessToken = JWTService.signAccessToken({ _id: userId }, '24h');
         const newRefreshToken = JWTService.signRefreshToken({ _id: userId }, '7d');
 
         // Update the refresh token atomically

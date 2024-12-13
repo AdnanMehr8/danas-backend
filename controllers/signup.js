@@ -5,7 +5,7 @@ async function createUser(req, res) {
     try {
         const userData = req.body;
         const user = await userService.createUser(userData);
-        const accessToken = JWTService.signAccessToken({ _id: user._id }, '30m');
+        const accessToken = JWTService.signAccessToken({ _id: user._id }, '24h');
         const refreshToken = JWTService.signRefreshToken({ _id: user._id }, '7d');
 
         // Store refresh token in DB
@@ -13,7 +13,8 @@ async function createUser(req, res) {
 
         // Send tokens in cookies
         res.cookie('accessToken', accessToken, {
-            maxAge: 1000 * 60 * 30, // 30 minutes
+            // maxAge: 1000 * 60 * 30, // 30 minutes
+            maxAge: 1000 * 60 * 60 * 24, // 24 hours
             httpOnly: true,
             sameSite: 'none',
             secure: true

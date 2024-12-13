@@ -13,7 +13,8 @@ async function refresh(req, res, next) {
         const { accessToken, refreshToken: newRefreshToken, userId } = await authService.refresh(refreshToken);
 
         res.cookie('accessToken', accessToken, {
-            maxAge: 1000 * 60 * 30, // 30 minutes
+            // maxAge: 1000 * 60 * 30, // 30 minutes
+            maxAge: 1000 * 60 * 60 * 24, // 24 hours
             httpOnly: true,
             sameSite: 'none',
             secure: true

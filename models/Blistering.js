@@ -132,6 +132,7 @@ const Blistering = new mongoose.Schema({
             sealing: String,
             leakTest: String,
             performedByProductionQA: String,
+            performedByProductionQADate: String,
           },
         ],
         blisterMachineId: String,
